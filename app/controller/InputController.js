@@ -44,7 +44,30 @@ function getRekapKinerja(req,res){
     });
 }
 
+function deleteData(req, res) {
+    const id = req.params.id;
+
+    RekapData.destroy({
+        where: {
+            id: id
+        }
+    })
+    .then(num => {
+        if (num === 1) {
+            res.status(200).json({ message: "Data berhasil dihapus." });
+        } else {
+            res.status(404).json({ message: `Data dengan ID ${id} tidak ditemukan.` });
+        }
+    })
+    .catch(err => {
+        console.error('Error deleting data:', err);
+        res.status(500).json({ message: "Terjadi kesalahan saat menghapus data." });
+    });
+}
+
+
 module.exports = {
     addData,
-    getRekapKinerja
+    getRekapKinerja,
+    deleteData
 }

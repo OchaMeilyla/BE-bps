@@ -7,5 +7,6 @@ const controller = require("./controller/InputController");
 
 router.post("/submit", controller.addData);
 router.get("/rekap",controller.getRekapKinerja);
+router.delete("/rekap/:id", controller.deleteData);
 
 module.exports = router;
