@@ -10,7 +10,8 @@ const rekap = connection.define(
       volume_kegiatan: {type: sequelize.DataTypes.INTEGER},
       satuan_kegiatan: {type: sequelize.DataTypes.TEXT},
       waktu_mulai: {type: sequelize.DataTypes.TIME},
-      waktu_selesai: {type: sequelize.DataTypes.TIME}  
+      waktu_selesai: {type: sequelize.DataTypes.TIME},
+      bulan_kegiatan:{type: sequelize.DataTypes.INTEGER}  // tambahkan kolom bulan_kegiatan  
     },
     {
         freezeTableName: true,

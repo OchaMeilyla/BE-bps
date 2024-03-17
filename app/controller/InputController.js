@@ -2,7 +2,7 @@ const submit = require('../models/submit')
 const RekapData = require('../models/rekap')
 
 function addData(req,res,next){
-    if(req.body.nama_pegawai == "" || req.body.tanggal_kegiatan == "" || req.body.nama_kegiatan == "" || req.body.volume_kegiatan == "" || req.body.satuan_kegiatan == "" || req.body.waktu_mulai == "" || req.body.waktu_selesai == ""){
+    if(req.body.nama_pegawai == "" || req.body.tanggal_kegiatan == "" || req.body.nama_kegiatan == "" || req.body.volume_kegiatan == "" || req.body.satuan_kegiatan == "" || req.body.waktu_mulai == "" || req.body.waktu_selesai == "" || req.body.bulan_kegiatan == "" ){
         res.status(400).json({
             message: "Silahkan Isi Terlebih Dahulu"
         })
@@ -16,7 +16,8 @@ function addData(req,res,next){
         volume_kegiatan: req.body.volume_kegiatan,
         satuan_kegiatan: req.body.satuan_kegiatan,
         waktu_mulai: req.body.waktu_mulai,
-        waktu_selesai: req.body.waktu_selesai
+        waktu_selesai: req.body.waktu_selesai,
+        bulan_kegiatan: req.body.bulan_kegiatan //untuk bulan
     })
 
     .then(function(){
