@@ -83,26 +83,6 @@ function getDataById(req, res) {
     });
 }
 
-// Fungsi untuk memperbarui data berdasarkan ID
-// function updateData(req, res) {
-//     const id = req.params.id;
-//     const updatedData = req.body; // Data yang sudah diedit dikirim dari klien
-
-//     RekapData.update(updatedData, {
-//         where: { id: id } // Menggunakan ID untuk menemukan data yang akan diperbarui
-//     })
-//     .then(num => {
-//         if (num == 1) {
-//             res.status(200).json({ message: "Data berhasil diperbarui." });
-//         } else {
-//             res.status(404).json({ message: `Data dengan ID ${id} tidak ditemukan.` });
-//         }
-//     })
-//     .catch(err => {
-//         console.error('Error updating data:', err);
-//         res.status(500).json({ message: "Terjadi kesalahan saat memperbarui data." });
-//     });
-// }
 function updateData(req, res) {
     const id = req.params.id;
     const updatedData = req.body; // Data yang sudah diedit dikirim dari klien
