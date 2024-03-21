@@ -22,7 +22,7 @@ function addData(req,res,next){
 
     .then(function(){
         res.status(201).json({
-            message: "Pendaftaran Berhasil. Terima Kasih Telah Mendaftar"
+            message: "input Kinerja Berhasil. Terima Kasih"
         })
     })
     .catch(function(err){
@@ -66,8 +66,76 @@ function deleteData(req, res) {
 }
 
 
+function getDataById(req, res) {
+    const id = req.params.id;
+
+    RekapData.findByPk(id)
+    .then(data => {
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).json({ message: `Data dengan ID ${id} tidak ditemukan.` });
+        }
+    })
+    .catch(err => {
+        console.error('Error fetching data:', err);
+        res.status(500).json({ message: "Terjadi kesalahan saat mengambil data." });
+    });
+}
+
+// Fungsi untuk memperbarui data berdasarkan ID
+// function updateData(req, res) {
+//     const id = req.params.id;
+//     const updatedData = req.body; // Data yang sudah diedit dikirim dari klien
+
+//     RekapData.update(updatedData, {
+//         where: { id: id } // Menggunakan ID untuk menemukan data yang akan diperbarui
+//     })
+//     .then(num => {
+//         if (num == 1) {
+//             res.status(200).json({ message: "Data berhasil diperbarui." });
+//         } else {
+//             res.status(404).json({ message: `Data dengan ID ${id} tidak ditemukan.` });
+//         }
+//     })
+//     .catch(err => {
+//         console.error('Error updating data:', err);
+//         res.status(500).json({ message: "Terjadi kesalahan saat memperbarui data." });
+//     });
+// }
+function updateData(req, res) {
+    const id = req.params.id;
+    const updatedData = req.body; // Data yang sudah diedit dikirim dari klien
+
+    RekapData.findByPk(id)
+    .then(data => {
+        if (!data) {
+            return res.status(404).json({ message: `Data dengan ID ${id} tidak ditemukan.` });
+        }
+
+        // Perbarui data dengan data yang diterima dari klien
+        data.update(updatedData)
+        .then(() => {
+            res.status(200).json({ message: "Data berhasil diperbarui." });
+        })
+        .catch(err => {
+            console.error('Error updating data:', err);
+            res.status(500).json({ message: "Terjadi kesalahan saat memperbarui data." });
+        });
+    })
+    .catch(err => {
+        console.error('Error fetching data:', err);
+        res.status(500).json({ message: "Terjadi kesalahan saat mengambil data." });
+    });
+}
+
+
+
+
 module.exports = {
     addData,
     getRekapKinerja,
-    deleteData
+    deleteData,
+    getDataById,
+    updateData
 }
